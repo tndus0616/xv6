@@ -37,7 +37,7 @@ thread_init(void)
   // a RUNNABLE thread.
   current_thread = &all_thread[0];
   current_thread->state = RUNNING;
-  uthread_init(thread_schedule);
+  // uthread_init(thread_schedule);
 
 }
 
