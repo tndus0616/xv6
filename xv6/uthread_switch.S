@@ -18,5 +18,7 @@ thread_switch:
 
 	popal				//스택에 저장했던 레지스터 값을 복원
 
+	movl $0, next_thread            // 다음 스레드를 0으로 설정 
+
 	ret				/* pop return address from stack */
 
