@@ -13,22 +13,6 @@
 typedef struct thread thread_t, *thread_p;
 typedef struct mutex mutex_t, *mutex_p;
 
-void (*scheduler)(void);
-// Function to initialize user-level threading
-void uthread_init(void (*sched_func)(void)) {
-    // Store the pointer to the scheduler function
-    scheduler = sched_func;
-
-    // Any additional initialization code can go here, such as setting up thread lists, initializing locks, etc.
-    // For example, initializing a lock to protect the thread list might be necessary.
-    printf(1, "User-level threading initialized with scheduler function.\n");
-}
-
-// This would be used in other parts of your threading library to invoke the scheduler.
-void invoke_scheduler(void) {
-    scheduler();  // Call the scheduler function set during initialization
-}
-
 struct thread {
   int        sp;                /* saved stack pointer */
   char stack[STACK_SIZE];       /* the thread's stack */
@@ -49,7 +33,6 @@ thread_init(void)
   // a RUNNABLE thread.
   current_thread = &all_thread[0];
   current_thread->state = RUNNING;
-  uthread_init(thread_schedule);
 
 }
 
