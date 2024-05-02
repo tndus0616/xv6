@@ -56,6 +56,10 @@ trap(struct trapframe *tf)
       release(&tickslock);
     }
     lapiceoi();
+    if(myproc() != 0 && myproc()->scheduler != 0 && myproc()->state == RUNNING){
+    void (scheduler)() = (void()())myproc()->scheduler;
+    scheduler();
+    }
     break;
   case T_IRQ0 + IRQ_IDE:
     ideintr();
