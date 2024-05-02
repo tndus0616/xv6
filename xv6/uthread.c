@@ -80,7 +80,7 @@ thread_create(void (*func)())
   * (int *) (t->sp) = (int)func;           // push return address on stack
   t->sp -= 32;                             // space for registers that thread_switch expects
   t->state = RUNNABLE;
-  uthread_create(thread_schedule);
+  uthread_init(thread_schedule);
 }
 
 void 
