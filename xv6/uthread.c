@@ -26,7 +26,7 @@ extern void thread_switch(void);
 void thread_schedule(void);
 
 void 
-thread_init(void)
+thread_init(void (*scheduler)(void))
 {
   // main() is thread 0, which will make the first invocation to
   // thread_schedule().  it needs a stack so that the first thread_switch() can
@@ -39,8 +39,7 @@ thread_init(void)
 
 }
 
-static void 
-thread_schedule(void)
+void thread_schedule(void)
 {
   thread_p t;
 
