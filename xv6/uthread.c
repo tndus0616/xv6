@@ -53,8 +53,13 @@ thread_schedule(void)
 
   if (current_thread != next_thread) {         /* switch threads?  */
     next_thread->state = RUNNING;
-    thread_switch();
-  } else
+    current_thread->state = RUNNABLE;
+    // 다음 스레드를 현재 스레드로 교체하기 전에 필요한 작업을 수행합니다.
+    thread_t *temp = current_thread;
+    current_thread = next_thread;
+    next_thread = temp;
+    thread_switch();  // 수정된 부분: 스레드 전환을 위한 함수 호출
+} else
     next_thread = 0;
 }
 
