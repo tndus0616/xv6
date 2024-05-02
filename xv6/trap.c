@@ -56,15 +56,12 @@ trap(struct trapframe *tf)
       release(&tickslock);
     }
     lapiceoi();
-    // if(myproc() && myproc()->state == RUNNING){
-    //     void (*scheduler)(void) = (void (*)(void))myproc()->scheduler;
-    //     if(scheduler != 0) {
-    //         scheduler();
-    //     }
-    // }
-    if (myproc() && myproc()->state == RUNNING) {
-    // 스케줄러 호출이 보장되도록 조건을 단순화
-    thread_schedule();
+    if(myproc() && myproc()->state == RUNNING){
+        void (*scheduler)(void) = (void (*)(void))myproc()->scheduler;
+        if(scheduler != 0) {
+            scheduler();
+        }
+    }
     }
     break;
   case T_IRQ0 + IRQ_IDE:
