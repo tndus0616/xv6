@@ -539,9 +539,9 @@ procdump(void)
   }
 }
 
-// int
-// uthread_init(int) // address of the user-level scheduler
-// {
-//     myproc()->scheduler = address;
-//     return 0;
-// }
+int
+uthread_init(int) // address of the user-level scheduler
+{
+    myproc()->scheduler = address;
+    return 0;
+}
