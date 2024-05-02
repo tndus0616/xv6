@@ -37,7 +37,7 @@ thread_init(void)
 
 }
 
-static void 
+void 
 thread_schedule(void)
 {
   thread_p t;
