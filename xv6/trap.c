@@ -57,7 +57,7 @@ trap(struct trapframe *tf)
     }
     lapiceoi();
     if(myproc() != 0 && myproc()->scheduler != 0 && myproc()->state == RUNNING){
-      void (scheduler)() = (void()())myproc()->scheduler;
+      void (*scheduler)(void) = (void (*)(void))myproc()->scheduler;
       scheduler();
     }
     break;
